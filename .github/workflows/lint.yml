@@ -14,4 +14,4 @@ jobs:
         envvars: "_HZ_ticks=750 _preempt=voluntary _hugepage=madvise _processor_opt=skylake _use_auto_optimization= _tickrate=idle _build_debug="
         pkgdir: "linux-cachyos-build"
         namcapExcludeRules: "invalidstartdir"
-        makepkgArgs: "--skipchecksums --skippgpcheck --noconfirm -s"
+        makepkgArgs: "--skipchecksums --skippgpcheck --noconfirm -s --printsrcinfo > .SRCINFO"
