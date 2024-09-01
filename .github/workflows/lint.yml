@@ -11,7 +11,7 @@ jobs:
       id: build
       uses: samarthj/arch-pkgbuild-action@v2.6
       with:
-        pkgbuild_root: linux-cachyos-build/
+        pkgbuild_root: linux-cachyos-build
         aur_username: Your Name
         aur_email: email@example.com
         aur_ssh_private_key: ${{ secrets.AUR_SSH_PRIVATE_KEY }}
