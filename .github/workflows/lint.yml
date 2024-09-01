@@ -1,26 +1,17 @@
-name: PKGBUILD CI
-
+name: Build and lint
 on:
   workflow_dispatch:
-
 jobs:
-  pkgbuild:
+  linux-cachyos:
     runs-on: ubuntu-latest
     steps:
-    - name: Build
-      id: build
-      uses: samarthj/arch-pkgbuild-action@v2.6
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Build (GCC)
+      id: makepkg
+      uses: CachyOS/pkgbuild-action@master
       with:
-        pkgbuild_root: linux-cachyos-build
-        aur_username: Your Name
-        aur_email: email@example.com
-        aur_ssh_private_key: ${{ secrets.AUR_SSH_PRIVATE_KEY }}
-        setup_aur: false
-        dry_run: false
-        custom_build_cmd: makepkg --config /home/builder/.makepkg.conf -cfC --needed --noconfirm
-      env:
-        _HZ_ticks: 750
-        _preempt: voluntary
-        _hugepage: madvise
-        _processor_opt: skylake
-        _tickrate: idle
+        envvars: "_HZ_ticks=750 _preempt=voluntary _hugepage=madvise _processor_opt=skylake _use_auto_optimization= _tickrate=idle _build_debug="
+        pkgdir: "linux-cachyos-build"
+        namcapExcludeRules: "invalidstartdir"
+        makepkgArgs: "--skipchecksums --skippgpcheck --noconfirm -s"
